@@ -113,9 +113,10 @@ void AJWCharacter::ScrollWeapon(bool bScrollForward)
 
 	CurrentWeaponIndex = (bScrollForward ? CurrentWeaponIndex + 1 : CurrentWeaponIndex == 0 ? Weapons.Num() - 1 : CurrentWeaponIndex - 1) % Weapons.Num();
 	CurrentWeapon = Weapons[CurrentWeaponIndex];
-	
+
 	CurrentWeapon->SetActorHiddenInGame(false);
 	Mesh1P->SetHiddenInGame(false, false);
+	CurrentWeapon->RestoreMuzzle();
 }
 
 bool AJWCharacter::HandleWeaponPickup(AJW_BaseWeapon* Weapon)
@@ -125,7 +126,7 @@ bool AJWCharacter::HandleWeaponPickup(AJW_BaseWeapon* Weapon)
 	if (!Weapons.Contains(Weapon))
 	{
 		Weapons.Add(Weapon);
-		Weapon->AttachToComponent(WeaponRoot, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, false), FName(""));
+		Weapon->AttachToComponent(Mesh1P, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("GripPoint"));
 		Weapon->SetActorRelativeLocation(FVector::ZeroVector);
 		Weapon->SetActorHiddenInGame(true);
 		return true;

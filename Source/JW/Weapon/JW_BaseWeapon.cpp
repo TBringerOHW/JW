@@ -67,11 +67,21 @@ void AJW_BaseWeapon::ToggleWeaponPhysics(bool bEnabled)
 	WeaponMesh->SetCollisionEnabled(bEnabled ? ECollisionEnabled::QueryAndPhysics : ECollisionEnabled::NoCollision);
 }
 
+void AJW_BaseWeapon::RestoreMuzzle() const
+{
+	return;
+	FP_MuzzleLocation->SetRelativeLocation(FVector(5.0f, 65.0f, 15.0f));
+	FP_MuzzleLocation->SetRelativeRotation(FRotator::ZeroRotator);
+}
+
+
 void AJW_BaseWeapon::InitWeapon(FWeaponData Params)
 {
 	WeaponParams = Params;
 
-	UMaterialInstanceDynamic* WeaponMI = UMaterialInstanceDynamic::Create(WeaponMesh->GetMaterial(0),this);
-	WeaponMI->SetVectorParameterValue(FName(TEXT("BodyColor")),WeaponParams.VisualParams.WeaponColor);
+	FP_MuzzleLocation->AttachToComponent(WeaponMesh, FAttachmentTransformRules(EAttachmentRule::SnapToTarget, false), TEXT("Muzzle"));
+
+	UMaterialInstanceDynamic* WeaponMI = UMaterialInstanceDynamic::Create(WeaponMesh->GetMaterial(0), this);
+	WeaponMI->SetVectorParameterValue(FName(TEXT("BodyColor")), WeaponParams.VisualParams.WeaponColor);
 	WeaponMesh->SetMaterial(0, WeaponMI);
 }

@@ -23,7 +23,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Mesh)
 	USkeletalMeshComponent* WeaponMesh;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Params)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Params, meta=(ExposeOnSpawn = true))
 	FWeaponData WeaponParams;
 	
 
@@ -44,6 +44,7 @@ public:
 	/** Fires a projectile. */
 	UFUNCTION(BlueprintCallable)
 	void ToggleWeaponPhysics(bool bEnabled);
+	void RestoreMuzzle() const;
 
 	UFUNCTION(BlueprintCallable)
 	void InitWeapon(FWeaponData Params);
