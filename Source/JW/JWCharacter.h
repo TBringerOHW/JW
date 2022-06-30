@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Damageable.h"
-#include "JW_BaseWeapon.h"
+#include "Weapon/JW_BaseWeapon.h"
 #include "GameFramework/Character.h"
 #include "JWCharacter.generated.h"
 

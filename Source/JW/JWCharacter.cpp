@@ -90,13 +90,13 @@ void AJWCharacter::OnFire()
 	CurrentWeapon->Fire();
 
 	// try and play a firing animation if specified
-	if (CurrentWeapon && CurrentWeapon->FireAnimation != nullptr)
+	if (CurrentWeapon && CurrentWeapon->WeaponParams.VisualParams.FireAnimation != nullptr)
 	{
 		// Get the animation object for the arms mesh
 		UAnimInstance* AnimInstance = Mesh1P->GetAnimInstance();
 		if (AnimInstance != nullptr)
 		{
-			AnimInstance->Montage_Play(CurrentWeapon->FireAnimation, 1.f);
+			AnimInstance->Montage_Play(CurrentWeapon->WeaponParams.VisualParams.FireAnimation, 1.f);
 		}
 	}
 }

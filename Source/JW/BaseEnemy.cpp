@@ -27,6 +27,7 @@ void ABaseEnemy::Tick(float DeltaTime)
 
 float ABaseEnemy::ReceiveDamage_Implementation(float DamageAmount)
 {
+	if (Health <= 0) return Health;
 	Health = FMath::Clamp(Health - DamageAmount, 0.0f, MaxHealth);
 	if (OnDamageReceived.IsBound()) OnDamageReceived.Broadcast(Health, DamageAmount);
 
@@ -45,5 +46,15 @@ float ABaseEnemy::GetCurrentHealth_Implementation()
 float ABaseEnemy::GetMaximumHealth_Implementation()
 {
 	return MaxHealth;
+}
+
+FReceivedDamageDeleagate* ABaseEnemy::GetOnDamageReceivedDelegate()
+{
+	return &OnDamageReceived;
+}
+
+FEntityDeadDelegate* ABaseEnemy::GetOnDeadReceivedDelegate()
+{
+	return &OnEntityDead;
 }
 

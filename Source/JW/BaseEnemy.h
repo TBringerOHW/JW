@@ -37,9 +37,9 @@ public:
 
 	virtual float ReceiveDamage_Implementation(float DamageAmount) override;
 
-	virtual float GetCurrentHealth_Implementation();
+	virtual float GetCurrentHealth_Implementation() override;
 
-	virtual float GetMaximumHealth_Implementation();
+	virtual float GetMaximumHealth_Implementation() override;
 
 	FReceivedDamageDeleagate* GetOnDamageReceivedDelegate();
 
